@@ -18,7 +18,7 @@ void clearScreen() {
 
 void printBoard(const Board &b, int score) {
     clearScreen();
-    cout << "2048 in C++  (w/a/s/d + Enter to move, q to quit)\n";
+    cout << "\nLet's Play 2048!\n(w/a/s/d + Enter to move, q to quit)\n";
     cout << "Score: " << score << "\n\n";
     cout << "+------+------+------+------+ \n";
     for (int r = 0; r < 4; ++r) {
@@ -128,25 +128,26 @@ bool performMove(Board &b, char move, int &score) {
 
     pair<Board,int> res;
 
-    if (move == 'a') {
+    if (move == 'a' || move == 'A') {
         res = moveLeft(b);
 
-    } else if (move == 'd') {
+    } else if (move == 'd' || move == 'D') {
         Board r1 = rotateClockwise(rotateClockwise(b));
         res = moveLeft(r1);
         res.first = rotateClockwise(rotateClockwise(res.first));
 
-    } else if (move == 'w') {
+    } else if (move == 'w' || move == 'W') {
         Board r1 = rotateCounter(b);
         res = moveLeft(r1);
         res.first = rotateClockwise(res.first);
 
-    } else if (move == 's') {
+    } else if (move == 's' || move == 'S') {
         Board r1 = rotateClockwise(b);
         res = moveLeft(r1);
         res.first = rotateCounter(res.first);
 
     } else {
+        // cout << "Invalid move, try again!\n";
         return false;
     }
 
@@ -179,7 +180,8 @@ int main() {
 
         if (checkWin(board)) {
             cout << "You reached 2048! Continue? (y/n): ";
-            char ch; cin >> ch;
+            char ch;
+            cin >> ch;
             if (tolower(ch) != 'y') break;
         }
 
@@ -194,13 +196,17 @@ int main() {
         cmd = tolower(cmd);
 
         if (cmd == 'q') {
-            cout << "Final score: " << score << "\n";
+            cout << "Final score: " << score << endl;
             break;
         }
 
         bool moved = performMove(board, cmd, score);
-        if (moved)
+        if (moved) {
             addRandomTile(board);
+        }
+        else if (moved == false) {
+            cout << "Invalid move, try again!\n";
+        }
     }
 
     cout << "Thanks for playing!\n";
