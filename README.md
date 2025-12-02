@@ -17,7 +17,7 @@ Optional (1 extra credit each)
 3.	You may create the GUI (Graphic User Interface).
 4.	Any other ad-on/ feature
 
-- Project Brief -
+Project Brief ---
 The goal of this project was to design and implement a playable version of the popular puzzle game 2048 using C++. The program runs in a console environment and includes tile movement, merging logic, in-game score tracking, win/lose detection, and a reset/quit option.
 
 Goals included:
@@ -28,7 +28,7 @@ Well-designed, intuitive, and user-friendly interface
 
 The final program meets all requirements and can be extended with more advanced features if desired.
 
-- Project Description -
+Project Description ---
 2048 is a single-player sliding tile puzzle.
 The objective is to combine matching tiles to reach the value 2048.
 Each move slides all tiles in one direction (up, down, left, right).
@@ -56,7 +56,7 @@ checkWin() : Determines if the player has won by checking if any tile has the va
 runGame() : Main game loop
 main() : Repeated play sessions and quit handling
 
-- Technical Write Up -
+Technical Write Up ---
 1. The board is represented as:
 
 using Board = vector<vector<int>>;
