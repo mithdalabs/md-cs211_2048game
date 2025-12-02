@@ -166,18 +166,22 @@ pair<Board,int> moveLeft(const Board &b) { // moves/merges row left to return ne
             }
         }
         //copy merged values back to board to be displayed
-        for (int c = 0; c < N; ++c)
+        for (int c = 0; c < N; ++c) {
             out[r][c] = (c < (int)merged.size()) ? merged[c] : 0;
+        }
     }
 
     return {out, gained};
 }
 
 bool boardsEqual(const Board &a, const Board &b) { // compares two boards
-    for (int r = 0; r < N; ++r)
-        for (int c = 0; c < N; ++c)
-            if (a[r][c] != b[r][c])
+    for (int r = 0; r < N; ++r) {
+        for (int c = 0; c < N; ++c) {
+            if (a[r][c] != b[r][c]) {
                 return false;
+            }
+        }
+    }
     return true;
 }
 
@@ -250,10 +254,18 @@ void runGame() { // initializes game
         printBoard(board, score); // print board with current values and score
 
         if (checkWin(board)) { // if game win detected
-            cout << "You reached 2048! Continue? (y/n): ";
-            char ch;
-            cin >> ch;
-            if (tolower(ch) != 'y') return;
+            if (cheatWin) {
+                cout << "You reached 2048 by cheating! Quiting game...";
+                return;
+            }
+            else {
+                cout << "You reached 2048! Continue? (y/n): ";
+                char ch;
+                cin >> ch;
+                if (tolower(ch) != 'y') {
+                    return;
+                }
+            }
         }
 
         if (!canMove(board)) { // if no more moves able to be done
@@ -294,7 +306,7 @@ void runGame() { // initializes game
 int main() {
     while (true) {
         runGame(); // run one full game session
-        if (quitFlag) { // if q is pressed in runGame, breaks loop immediately
+        if (quitFlag || cheatWin) { // if q is pressed in runGame or cheatWin enabled, breaks loop immediately
            break;
         }
         cout << "Play again? (y/n): ";
